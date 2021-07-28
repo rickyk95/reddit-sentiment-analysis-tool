@@ -1,0 +1,26 @@
+.first-section {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.first-section h1 {
+  background-color: black;
+  color: white;
+}
+#results {
+  background-color: #fe4501;
+}
+
+#statistics {
+  height: 200px;
+}
+#statistics h1,
+p {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#statistics p {
+  font-size: 25px;
+}

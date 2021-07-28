@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+       <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+
+
+    <header id="home-header">
+
+        <div class="row h-100">
+       
+            <div class="col-md-4">
+                
+                <img src="../img/reddit.png" width="80px" height="80px" class="img-fluid">
+                <h1 class="text-center">Reddit Sentiment Analysis Tool</h1>
+
+            </div>
+
+            <div class="col-md-8">
+
+                    <h2 class="text-center">Analyze the subreddit of your choice</h2>
+
+            </div>
+  
+        </div>
+
+    </header>
+
+      <section id="main">
+
+        <div id="main-overlay">
+
+            <div class="row h-100 align-items-center">
+
+                <div class="col-md-8">
+
+                        <h1 class="text-center text-white display-3">
+                           Unleash the power of data
+                        </h1>
+
+                </div>
+
+                 <div class="col-md-4">
+                    
+                    <img src="../img/graphs.jpg" alt="" class="img-fluid rounded-circle ">
+                    
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <section class="border border-bottom py-2 " id="showcase-area-header">
+
+        <h2 class="text-center">Discover how people feel about your product</h2>
+
+    </section>
+
+    <section id="showcase-area">
+
+        <div class="row">
+
+            <div class="col-md-4"> 
+    
+                <h1 class="text-center">Data at your fingertips</h1>
+
+                <img src="../img/graphs.jpg"  class="img-fluid rounded-circle px-5 my-2">
+
+                </div>
+            
+           
+            <div class="col-md-4">
+
+                   <h1 class="text-center">Insights from social media</h1>
+                   <img src="../img/twitter.jpg"  class="img-fluid rounded-circle px-5 mt-2">  
+
+            </div>
+
+            <div class="col-md-4"> 
+
+                  <h1 class="text-center">Understand your customers</h1>
+                  <img src="../img/customer.jpg"  class="img-fluid rounded-circle px-5 mt-1">   
+
+                </div>
+        </div>
+
+    </section>
+
+
+    <section id="sentiment-analysis-header" class="py-2">
+
+            <h2 class="text-center">What is sentiment analysis?</h2>
+        
+    </section>
+
+    <section id="sentiment-analysis" class="my-1">
+        
+        <div class="row align-items-center  mx-3  border-bottom border-dark">
+            <div class="col-md-6">
+         <img src="../img/sentiment.jpg"  width="400px" height="400px" class=" d-block mx-auto py-3">
+
+            </div>
+            <div class="col-md-6">
+
+                    <p>Sentiment analysis is the process of computationally identifying and categorizing opinions expressed in a piece of text, especially in order to determine whether the writer's attitude towards a particular topic, product, etc. is positive, negative, or neutral.</p>
+            </div>
+        </div>
+           
+        <div class="row align-items-center border-bottom border-dark mx-3 ">
+
+               <div class="col-md-6 order-md-2 ">
+                <img src="../img/social-media.jpg"  width="400px" height="400px" class="d-block mx-auto  py-3">
+            </div>
+
+
+           
+             <div class="col-md-6 order-md-1">
+
+                <p>It can be used in a variety of different contexts productive for businesses. One increasingly useful application of sentiment analysis methods is social media research. Particular companies might be interested in what the community is saying about its products/services, or determine the public's reaction to a recent ad campaign.  </p>
+            </div>
+
+           
+
+           
+   
+        </div>
+
+
+
+    </section>
+
+
+    <section id="instructions">
+        <h1 class="text-center">Instructions</h1>
+
+
+<div class="row justify-content-center">
+
+<div class="col-10">
+
+            <ol class=" p-5 ">
+                <li class="display-4 my-3">Visit the sub-reddit of your choice</li>
+                 <li class="display-4 my-3">Copy the url link</li>
+                <li class="display-4 my-3">Paste it on the form below</li>
+                <li class="display-4 my-3">Enter your email to receive a screenshot of the results</li>
+                <li class="display-4 my-3">Click submit!</li>
+
+            </ol>
+
+            </div>
+
+</div>
+
+    </section>
+
+  
+
+
+  
+    <section id="form">
+
+  
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-8">
+
+                <form action="/submit" method="POST">
+
+                        <h1 class="text-center">Enter your url</h1>
+
+                        <div class="form-group">
+                            <label for="url"> URL </label>
+                            <input id="url" name="url" type="text" class="form-control" name="url">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="url"> Email </label>
+                            <input id="url" name="url" type="text" class="form-control" name="url">
+                        </div>
+
+                        <div class="form-group">
+
+                            <input  id="submit" type="submit" class="btn  form-control" value="Submit">
+
+                        </div>
+                    </form>
+
+                </div>
+
+        </div>
+  
+
+       
+    </section>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+
+
+    {{!-- <script src="/js/graphs.js"></script> --}}
+
+    <script>
+
+ const socket = io()
+        socket.on('o',()=>{
+            console.log('received')
+            window.location="http://www.localhost:3000/results";
+        })
+    </script>
+</body>
+
+</html>

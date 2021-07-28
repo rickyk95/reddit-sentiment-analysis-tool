@@ -1,0 +1,70 @@
+<html>
+
+
+<head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/results.css">
+
+</head>
+
+<body>
+
+    <h1 id="results" class="text-center text-white py-3">Your Results</h1>
+
+    <h1 class="text-center">Subreddits</h1>
+
+    <div class="row">
+
+        <div class="col first-section" >
+            
+            <h1 class="text-center">Topics</h1>
+            {{#each subreddits}} 
+
+                <h5 class="text-center">{{this.topic}} Score:{{this.score}}</h5>
+            
+            {{/each}}
+
+        
+        </div>
+
+
+
+        <div class="col text-center">
+
+            <canvas id="myChart"></canvas>
+
+        </div>
+
+    </div>
+
+
+    <section  id="statistics">
+
+        <h1 class="text-center">The average score is: {{average}}</h1>
+        <p class="text-center mt-3" >An average score of 0 indicates overall neutral valence. Anything below or
+            above 0 indicates a negative or positive valence (respectively). </p>
+
+    </section>
+
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.js"></script>
+
+    <script src="/js/graphs.js"></script>
+     <script src="/js/canvas.js"></script>
+    <script src="/js/order-scores.js"></script>
+
+    <script>
+
+        var subreddits = {{{stringifiedSubreddits}}}
+        console.log(subreddits)
+        orderScores(subreddits)
+        createNewChart(ctx,keys,scores)    
+
+    </script>
+
+</body>
+
+</html>
