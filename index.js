@@ -2,12 +2,13 @@ const express = require('express')
 const app = express()
 const http = require('http');
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 const path = require('path')
-const flash = require('connect-flash')
 const { scoreThreads } = require('./public/js/puppeteerFunctions/scoreThreads.js')
 const { search } = require('./public/js/puppeteerFunctions/search.js')
 const { screenShot } = require('./public/js/puppeteerFunctions/screenshot')
 const { generateUuid} = require('./public/js/rabbitmq/producer.js')
+
 let connection,channel;
 
 
@@ -37,12 +38,12 @@ app.engine('handlebars',exphbs())
 
 app.use(express.static(path.join(__dirname,'public')))
 
-app.use(express.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 
     server.listen(3000, async ()=>{
-
 })
-
 
 
 app.get('/', async (req,res)=>{
@@ -56,11 +57,13 @@ app.post('/submit', function(req,res,next){
 
 },async (req,res)=>{
 
+     let z =  req.body.url.toString().trim()
+     
      res.render('waiting',{layout:false}) 
 
      let queue = await channel.assertQueue('');
 
-     channel.sendToQueue('rpc_queue',Buffer.from('https://www.reddit.com/r/TrueOffMyChest/'),{
+     channel.sendToQueue('rpc_queue',Buffer.from(req.body.url.toString()),{
          correlationId:generateUuid(),
          replyTo:queue.queue
        }) 
@@ -77,16 +80,17 @@ app.post('/submit', function(req,res,next){
 
 
 app.get('/results', function(req,res,next){
+
     req.io=io;
     next()
-
-}, async (req,res)=>{
+    
+},(req,res)=>{
     
     const {subreddits, average} = results
 
     res.render('results',{layout:false,stringifiedSubreddits:JSON.stringify(subreddits),subreddits:subreddits,average})
 
-    await screenShot()
+     screenShot()
   
 })
 
@@ -102,9 +106,4 @@ app.get('/screenshot', function(req,res,next){
 
 
 })
-
-
-
-
-
 

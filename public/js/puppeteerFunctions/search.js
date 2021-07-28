@@ -8,7 +8,10 @@ puppeteer.use(StealthPlugin())
 async function search(url){
 
     try{
-            const browser = await puppeteer.launch({headless:true});
+
+            console.log('searchurl',url)
+
+            const browser = await puppeteer.launch({headless:false});
         
             const context = browser.defaultBrowserContext()
 
