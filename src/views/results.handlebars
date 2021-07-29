@@ -22,7 +22,7 @@
             <h1 class="text-center">Topics</h1>
             {{#each subreddits}} 
 
-                <h5 class="text-center">{{this.topic}} Score:{{this.score}}</h5>
+                <h5 class="text-center">{{this.topic}} <span class="text-danger"> Score:{{this.score}}</span></h5>
             
             {{/each}}
 
@@ -52,9 +52,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.js"></script>
 
-    <script src="/js/graphs.js"></script>
-     <script src="/js/canvas.js"></script>
-    <script src="/js/order-scores.js"></script>
+    <script src="/js/graph/graphs.js"></script>
+     <script src="/js/graph/canvas.js"></script>
+    <script src="/js/graph/order-scores.js"></script>
 
     <script>
 

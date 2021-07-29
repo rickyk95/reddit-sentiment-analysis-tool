@@ -1,6 +1,6 @@
 
 const { scoreThreads } = require('./scoreThreads.js')
-const { sa } = require('../sentiment.js')
+const { sa } = require('../sentiment/sentiment.js')
 const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
@@ -11,7 +11,7 @@ async function search(url){
 
             console.log('searchurl',url)
 
-            const browser = await puppeteer.launch({headless:false});
+            const browser = await puppeteer.launch({headless:true});
         
             const context = browser.defaultBrowserContext()
 
@@ -29,9 +29,6 @@ async function search(url){
             await page.exposeFunction('scoreThreads',scoreThreads)
 
             const threadTopics = await page.evaluate(scoreThreads)
-
-
-            //console.log('time', threadTopics)
 
             await browser.close()
 

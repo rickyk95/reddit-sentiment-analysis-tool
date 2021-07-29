@@ -1,36 +1,20 @@
 const express = require('express')
 const app = express()
 const http = require('http');
+const server = http.createServer(app)
+const socketio = require('socket.io');
+ const io = socketio(server)
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const path = require('path')
 const { scoreThreads } = require('./public/js/puppeteerFunctions/scoreThreads.js')
 const { search } = require('./public/js/puppeteerFunctions/search.js')
-const { screenShot } = require('./public/js/puppeteerFunctions/screenshot')
 const { generateUuid} = require('./public/js/rabbitmq/producer.js')
+const getResultsRoute = require('./routes/results.js')
+const getScreenshotRoute = require('./routes/screenshot.js')
+const connectRabbitMQ  = require('./public/js/rabbitmq/connect.js')
 
-let connection,channel;
-
-
-var amqp = require('amqplib');
-
-
-async function connect() {
-
-    connection = await amqp.connect('amqp://localhost') 
-    channel =  await connection.createChannel()
-    console.log('created2000')
- 
- }
-
- connect()
-
-const session = require('express-session')
-const server = http.createServer(app)
-const socketio = require('socket.io');
-const { json } = require('express');
-const io = socketio(server)
-
+connectRabbitMQ()
 
 app.set('view engine','handlebars')
 
@@ -41,9 +25,10 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+app.use(getResultsRoute)
 
-    server.listen(3000, async ()=>{
-})
+app.use(getScreenshotRoute)
+
 
 
 app.get('/', async (req,res)=>{
@@ -51,59 +36,29 @@ app.get('/', async (req,res)=>{
  
 })
 
+
+
 app.post('/submit', function(req,res,next){
     req.io=io;
     next()
-
 },async (req,res)=>{
-
-     let z =  req.body.url.toString().trim()
-     
+   
      res.render('waiting',{layout:false}) 
-
      let queue = await channel.assertQueue('');
-
      channel.sendToQueue('rpc_queue',Buffer.from(req.body.url.toString()),{
          correlationId:generateUuid(),
          replyTo:queue.queue
        }) 
-   
       channel.consume(queue.queue,  (threads)=>{  
          console.log("received back wohooo")
          results = JSON.parse(threads.content.toString()) 
-         req.io.emit('o')   
-        
+         req.io.emit('o')      
      })
 
-
 })
 
-
-app.get('/results', function(req,res,next){
-
-    req.io=io;
-    next()
-    
-},(req,res)=>{
-    
-    const {subreddits, average} = results
-
-    res.render('results',{layout:false,stringifiedSubreddits:JSON.stringify(subreddits),subreddits:subreddits,average})
-
-     screenShot()
-  
+server.listen(3000,  ()=>{
+    console.log('Connected')
 })
 
-
-app.get('/screenshot', function(req,res,next){
-    req.io=io;
-    next()
-},async (req,res)=>{
-    
-    const {subreddits, average} = results
-
-    res.render('results',{layout:false,stringifiedSubreddits:JSON.stringify(subreddits),subreddits:subreddits,average})
-
-
-})
 
