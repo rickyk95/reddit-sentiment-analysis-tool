@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
 
 
@@ -6,32 +8,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/results.css">
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 
 <body>
 
-    <h1 id="results" class="text-center text-white py-3">Your Results</h1>
+    <h1 id="results" class="text-center text-white p-3 w-100">Your Results</h1>
 
     <h1 class="text-center">Subreddits</h1>
 
-    <div class="row">
+    <div class="row mx-0 ">
 
-        <div class="col first-section" >
+        <div class=" d-none d-md-block col-6 first-section" >
             
             <h1 class="text-center">Topics</h1>
             {{#each subreddits}} 
 
                 <h5 class="text-center">{{this.topic}} <span class="text-danger"> Score:{{this.score}}</span></h5>
             
-            {{/each}}
-
-        
+            {{/each}} 
         </div>
 
-
-
-        <div class="col text-center">
+        <div class="col-md-6 text-center">
 
             <canvas id="myChart"></canvas>
 

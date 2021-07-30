@@ -1,17 +1,19 @@
 const express = require('express')
 const router = new express.Router()
 const { screenShot } = require('../public/js/puppeteerFunctions/screenshot')
+const bodyParser = require('body-parser')
 
-const getResults = (req,res)=>{  
 
-    const {subreddits, average} = results
-
-    res.render('results',{layout:false,stringifiedSubreddits:JSON.stringify(subreddits),subreddits:subreddits,average})
+router.use(bodyParser.urlencoded({ extended: true }));
+// router.get('/results',(req,res)=>{ 
     
-     screenShot()
-};
+//     console.log(req.session.email,'SESSION email')
+//     const {subreddits, average} = results
 
-router.get('/results',getResults)
+//     res.render('results',{layout:false,stringifiedSubreddits:JSON.stringify(subreddits),subreddits:subreddits,average})
+    
+//      screenShot(req.session.email)
+// })
 
 
 

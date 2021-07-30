@@ -1,3 +1,13 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* #myChart {
+  width: 400px !important;
+  height: 400px !important;
+} */
+
 .first-section {
   height: 400px;
   overflow-y: scroll;
@@ -14,13 +24,17 @@
 #statistics {
   height: 200px;
 }
-#statistics h1,
-p {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+
+#statistics h1 {
+  font-size: 23px;
 }
 
 #statistics p {
-  font-size: 25px;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 770px) {
+  #myChart {
+    width: 300px !important;
+  }
 }

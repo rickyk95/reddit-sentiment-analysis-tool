@@ -20,8 +20,9 @@
     <script>
 
         const socket = io()
-        socket.on('o',()=>{
+        socket.on('redirect',(email)=>{
             console.log('received')
+            socket.emit('email',email)
             window.location="http://www.localhost:3000/results";
         })
 

@@ -3,23 +3,19 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 const path = require('path')
 puppeteer.use(StealthPlugin())
 const transporter = require('../email/email.js')
+const bodyParser = require('body-parser')
 
 console.log(path.join(__dirname,'../../../screenshot.png'))
-const mailOptions = {
+var mailOptions = {
   from: 'reddit.sentiment.tool@gmail.com',
-  to: 'rickyk95@hotmail.com',
   subject: "Here's your screenshot!",
   text: 'Thanks for using our Reddit Sentiment Analysis Tool',
-  attachments:[
-    {
-      filename:'screenshot.png',
-      path:path.join(__dirname,'../../../screenshot.png')
-    }
-  ]
+  attachments:[]
+ 
 };
 
 
-async function screenShot(){
+async function screenShot(email){
 
   try{
 
@@ -32,17 +28,29 @@ async function screenShot(){
         const page = await browser.newPage();
 
          await page.goto('http://localhost:3000/screenshot');
-
-        console.log('taking screenshot')
+       
          
          await page.screenshot({                     
  
            path: "./screenshot.png",                   
          
-           fullPage: true, 
+          clip:{
+            x:0,
+            y:0,
+            width:800,
+            height:700
+          }
          })
 
-         browser.close()  
+         mailOptions.to=email
+
+         await page.waitFor(5000)
+         mailOptions.attachments[0]= {file:'screenshot.png'}
+         mailOptions.attachments[1]={path:path.join(__dirname,'../../../../screenshot.png')}
+         console.log(path.join(__dirname,'../../../screenshot.png'))
+         console.log(mailOptions)
+
+        //  browser.close()  
          
          transporter.sendMail(mailOptions, function(error, info){
           if (error) {

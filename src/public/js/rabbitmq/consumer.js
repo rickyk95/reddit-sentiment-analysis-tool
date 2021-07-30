@@ -2,6 +2,7 @@ var amqp = require('amqplib');
 
 const { search } = require('../puppeteerFunctions/search.js')
 
+const url = process.env.CLOUDAMQP_URL || "amqp://localhost";
 
 
 async function connect() {
@@ -16,11 +17,8 @@ async function connect() {
 
     channel.consume('rpc_queue', async (redditUrl)=>{
 
-        console.log(redditUrl)
-        console.log(redditUrl.content.toString())
-        const threads = await search(redditUrl.content.toString())
 
-        console.log(threads)
+        const threads = await search(redditUrl.content.toString())
 
         channel.sendToQueue(redditUrl.properties.replyTo,Buffer.from(JSON.stringify(threads)),{
 

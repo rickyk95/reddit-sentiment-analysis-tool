@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/index.js ",
+    "dev": "env-cmd -f./config/dev.env nodemon ./src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -11,6 +12,7 @@
     "amqplib": "^0.8.0",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
+    "env-cmd": "^10.1.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.2",
     "express-session": "^1.17.2",
@@ -19,6 +21,7 @@
     "puppeteer-extra": "^3.1.18",
     "puppeteer-extra-plugin-stealth": "^2.7.8",
     "req-flash": "0.0.3",
+    "save": "^2.4.0",
     "sentiment": "^5.0.2",
     "socketio": "^1.0.0"
   },

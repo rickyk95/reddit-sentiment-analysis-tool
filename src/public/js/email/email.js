@@ -3,8 +3,8 @@ const nodemailer = require("nodemailer");
 var transporter = nodemailer.createTransport({
     service: 'gmail',
       auth: {
-        user: 'reddit.sentiment.tool@gmail.com',
-        pass: 'nodeJS2021'
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
       }
     });
 
