@@ -19,7 +19,8 @@ async function connect() {
 
         try{
 
-        
+        console.log('redditURLDESTINY',redditUrl)
+        console.log('redditURLDESTINYString',redditUrl.content.toString())
         const threads = await search(redditUrl.content.toString())
 
         console.log(threads)
