@@ -17,13 +17,22 @@ async function connect() {
 
     channel.consume('rpc_queue', async (redditUrl)=>{
 
+        try{
 
+        
         const threads = await search(redditUrl.content.toString())
-
+        
         channel.sendToQueue(redditUrl.properties.replyTo,Buffer.from(JSON.stringify(threads)),{
 
             correlationId:redditUrl.properties.correlationId
         })
+
+        }catch(e){
+
+           console.log(e)
+        }
+
+  
 
         
         
