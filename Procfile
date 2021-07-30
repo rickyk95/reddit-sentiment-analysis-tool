@@ -1,0 +1,1 @@
+worker: node .src/public/js/rabbitmq/consumer.js
