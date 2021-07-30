@@ -21,7 +21,9 @@ async function connect() {
 
         
         const threads = await search(redditUrl.content.toString())
-        
+
+        console.log(threads)
+
         channel.sendToQueue(redditUrl.properties.replyTo,Buffer.from(JSON.stringify(threads)),{
 
             correlationId:redditUrl.properties.correlationId
@@ -29,7 +31,7 @@ async function connect() {
 
         }catch(e){
 
-           console.log(e)
+           console.log(e,'destiny')
         }
 
   
