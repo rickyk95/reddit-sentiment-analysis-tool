@@ -1,1 +1,1 @@
-worker: node .src/public/js/rabbitmq/consumer.js
+worker: node ./src/public/js/rabbitmq/consumer.js
