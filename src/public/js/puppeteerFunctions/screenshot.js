@@ -19,7 +19,7 @@ async function screenShot(email){
 
   try{
 
-        const browser = await puppeteer.launch({headless:true});
+        const browser = await puppeteer.launch({args: ['--no-sandbox'] });
 
         const context = browser.defaultBrowserContext()
 
