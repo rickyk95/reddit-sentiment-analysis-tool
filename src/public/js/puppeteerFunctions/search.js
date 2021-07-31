@@ -11,7 +11,7 @@ async function search(url){
 
             console.log('searchurl',url)
 
-            const browser = await puppeteer.launch({headless:true});
+            const browser = await puppeteer.launch({args: ['--no-sandbox'] });
         
             const context = browser.defaultBrowserContext()
 
@@ -33,8 +33,6 @@ async function search(url){
             await browser.close()
 
             return threadTopics
-
-
 
         }catch(e){
 
