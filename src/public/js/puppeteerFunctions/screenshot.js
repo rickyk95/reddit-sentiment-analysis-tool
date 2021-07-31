@@ -23,11 +23,11 @@ async function screenShot(email){
 
         const context = browser.defaultBrowserContext()
 
-        context.overridePermissions('http://localhost:3000/screenshot',['notifications'])
+        context.overridePermissions('https://reddit-sentiment-tool.herokuapp.com/results',['notifications'])
 
         const page = await browser.newPage();
 
-         await page.goto('http://localhost:3000/screenshot');
+         await page.goto('https://reddit-sentiment-tool.herokuapp.com/results');
        
          
          await page.screenshot({                     
